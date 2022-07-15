@@ -16,6 +16,8 @@ export const Layout: NextPage<{ children: ReactElement }> = (props) => {
 
       <div className="main">
       	{props.children}
+
+        <div style={{ height: '200px' }} />
       </div>
     </>
 	)
