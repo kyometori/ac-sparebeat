@@ -1,116 +1,72 @@
-.container {
-  padding: 0 2rem;
+.list {
+  border:1px solid #000;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
 }
 
-.main {
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.list th {
+  background: #DCDCDC;
 }
 
-.footer {
-  display: flex;
-  flex: 1;
-  padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
-  justify-content: center;
-  align-items: center;
+.list td {
+  height: 30px;
 }
 
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
+.list td a {
+  display: block;
 }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
+.list td:nth-child(1) {
+  background-color: #63F2DA;
 }
 
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
+.list td:nth-child(1):hover {
+  background-color: #BFFFF5;
+  cursor: pointer;
 }
 
-.title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
+.list td:nth-child(2) {
+  background-color: #EE82EE;
 }
 
-.title,
-.description {
-  text-align: center;
+.list td:nth-child(2):hover {
+  background-color: #EFABEF;
+  cursor: pointer;
 }
 
-.description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
+.list td:nth-child(3) {
+  background-color: #7FFF00;
 }
 
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+.list td:nth-child(4) {
+  background-color: #FFD700;
 }
 
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
+.list td:nth-child(5) {
+  background-color: #DC143C;
 }
 
-.card {
-  margin: 1rem;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
+.list th:nth-child(1) {
+  width: 33%;
 }
 
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+.list th:nth-child(2) {
+  width: 28%;
 }
 
-.card h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
+.list th:nth-child(3) {
+  width: 13%;
 }
 
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
+.list th:nth-child(4) {
+  width: 13%;
 }
 
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
+.list th:nth-child(5) {
+  width: 13%;
 }
 
-@media (max-width: 600px) {
-  .grid {
-    width: 100%;
-    flex-direction: column;
-  }
+.in {
+  display: none
 }

@@ -1,16 +1,101 @@
-html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  position: relative;
+  height: 150%;
+  background-color: #21A3E4;
+  font-family: 'Helvetica', 'Arial';
 }
 
-a {
-  color: inherit;
+h1 {
+  font-family: Verdana;
+}
+
+hr{
+  margin-top:15px;
+  margin-bottom:25px;
+  border:1px solid #2775B9;
+  width: 85%;
+}
+
+.main {
+  text-align: center;
+  margin: 0px auto;
+  padding: 0px;
+  height: 130%;
+  width: 85%;
+  background-color: #E6E6FA;
+}
+
+.main h1 {
+  padding-top: 18px;
+  padding-bottom: 10px;
+}
+
+.nav {
+  height: 76px;
+  width: 100%;
+  text-align: center;
+}
+
+#friend li {
+  background-color: #CC59D0;
+}
+
+#friend li:hover {
+  background-color: #C094C1;
+}
+
+.nav ul{
+  margin: 0px auto;
+  padding-top: 15px;
+  padding-right: 40px;
+  border-top: black 1px solid;
+  display: inline-block;
+}
+
+.nav ul li{
+  cursor: pointer;
+  border: black 2px solid;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 300;
+  padding: 10px;
+  margin: auto 5px;
+  width: 150px;
+  background-color: #247CB6;
+}
+
+.nav ul li:hover {
+  background-color: #44B5FF;
+}
+
+.nav ul a li {
+  color: black;
+}
+
+#title {
+  background-color: #D58AFF;
+  width: 100%;
+  height: 76px;
+  padding: 0px;
+  text-align: center;
+  margin: 0px;
+}
+
+#title h1 {
+  display: inline-block;
+  position: relative;
+  top: -5px;
+}
+
+a, a:visited {
+  color: #00F;
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+a:active {
+  color: #32CD32;
 }
