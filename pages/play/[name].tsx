@@ -14,13 +14,15 @@ const Playground: NextPage<PlaygroundProps> = ({ name, title }) => {
 
   useEffect(() => {
     document.getElementById('sparebeat')!.style.height = window.outerWidth < 990 ? '1280px' : '640px'
+    // @ts-ignore
+    window.Sparebeat && window.Sparebeat.load(`../maps/${name}.json`, `../music/${name}.mp3`)
   }, [])
 
   return (
     <>
       <Script src="https://sparebeat.com/embed/api.js" 
         // @ts-ignore
-        onReady={() => window.Sparebeat.load(`../maps/${name}.json`, `../music/${name}.mp3`)}
+        onLoad={() => window.Sparebeat.load(`../maps/${name}.json`, `../music/${name}.mp3`)}
         onError={console.error}
       />
       <h1>{title}</h1>
@@ -35,8 +37,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const mapNames = readdirSync(`./public/maps`).filter(file => file.endsWith('.json'));
 
   return {
-    paths: mapNames.map(blog => {
-      return { params: { name: blog.slice(0, -5) } }
+    paths: mapNames.map(mapName => {
+      return { params: { name: mapName.slice(0, -5) } }
     }),
     fallback: false
   }
