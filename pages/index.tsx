@@ -97,7 +97,7 @@ function cmpToNumber(cmp: Compare) {
   throw new Error('RESULT_IS_INDETERMINATE')
 }
 
-function nonIndeterminate(...args) {
+function nonIndeterminate(...args: Array<Compare>) {
   for (const a of args) {
     if (a !== Compare.INDETERMINATE) return a;
   }
@@ -106,13 +106,16 @@ function nonIndeterminate(...args) {
 
 function compareDiff(a: MapDiffData, b: MapDiffData): number {
   const dH = compareDiffSingle(a.hard, b.hard)
-  if (dH !== 0) return cmpToNumber(nonIndeterminate(dH))
-  
   const dN = compareDiffSingle(a.normal, b.normal)
-  if (dN !== 0) return cmpToNumber(nonIndeterminate(dN, dH))
-
   const dE = compareDiffSingle(a.easy, b.easy)
-  return cmpToNumber(nonIndeterminate(dE, dN, dH))
+
+  if (dH === Compare.EQUAL) {
+    if (dN === Compare.EQUAL) {
+      return cmpToNumber(nonIndeterminate(dE, dN, dH))
+    }
+    return cmpToNumber(nonIndeterminate(dN, dH))
+  }
+  return cmpToNumber(nonIndeterminate(dH))
 }
 
 function compareDiffSingle(a: string, b: string): Compare {
