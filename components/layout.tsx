@@ -1,17 +1,21 @@
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { ReactElement } from 'React'
 
 export const Layout: NextPage<{ children: ReactElement }> = (props) => {
+  const { route } = useRouter()
+  const owner = useOwner(route)
+
 	return (
 		<>
-      <div id="title"><h1>AC Sparebeat Room</h1></div>
+      <div id="title"><h1>{PageOwner[owner]} Sparebeat Room</h1></div>
 
       <div className="nav">
-        <ul>
-          <Link href="/"><a><li>Main Page</li></a></Link>
-          <Link href="/mrsr"><a id="friend"><li>MeowRim</li></a></Link>
-        </ul>
+        {
+          owner === PageOwner.AC ?  <MainHeaderNav /> 
+            : <MrsrHeaderNav />
+        }
       </div>
 
       <div className="main">
@@ -21,4 +25,32 @@ export const Layout: NextPage<{ children: ReactElement }> = (props) => {
       </div>
     </>
 	)
+}
+
+enum PageOwner {
+  AC, MeowRim
+}
+
+function useOwner(route: string): PageOwner {
+  if (route.startsWith('/mrsr')) return PageOwner.MeowRim
+
+  return PageOwner.AC
+}
+
+function MainHeaderNav() {
+  return (
+    <ul>
+      <Link href="/"><a><li>Main Page</li></a></Link>
+      <Link href="/mrsr"><a id="friend"><li>MeowRim</li></a></Link>
+    </ul>
+  )
+}
+
+function MrsrHeaderNav() {
+  return (
+    <ul>
+      <Link href="/mrsr"><a><li>Main Page</li></a></Link>
+      <Link href="/"><a id="friend"><li>AC</li></a></Link>
+    </ul>
+  )
 }
