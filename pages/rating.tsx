@@ -98,44 +98,45 @@ const RatingCalc: NextPage = () => {
 
 	return (
 		<>
-		<h1>Rating Calculator</h1>
-		<div id={styles.input}>
-			<InputArea title="Score" handleChange={handleScoreChange} value={score} />
-			<InputArea title="Just" handleChange={handleJustChange} value={justCount} />
-			<InputArea title="Rush" handleChange={handleRushChange} value={rushCount} />
-			<InputArea title="Cool" handleChange={handleCoolChange} value={coolCount} />
-			<InputArea title="Miss" handleChange={handleMissChange} value={missCount} />
-			<DiffInputArea 
-				title="Map Difficulty" 
-				handleChange={handleDiffChange} 
-				handlePlusSelect={handlePlusChange}
-				value={diff} 
-			/>
-		</div>
-		<span id={styles.show}>Your Rating: {rating}</span>
-		<h2 id={styles['detail-button']} onClick={() => {setHide(h => !h)}}>
-			{ hide ? '▲' : '▼' } Details { hide ? '▲' : '▼' }
-		</h2>
-		<div id={styles.detail} style={{ display: hide ? 'none' : 'inherit' }}>
-			<table id={styles['detail-table']}>
-				<thead>
-					<tr> <th>Item</th> <th>Value</th> </tr>
-				</thead>
-				<tbody>
-					<tr> <td>Score Factor</td> <td>{fixed(score / SparebeatConstant.MaxScore)}</td> </tr>
-					<tr> <td>Just Factor</td> <td>{fixed(justCount / (justCount + rushCount + coolCount + missCount))}</td> </tr>
-					<tr> <td>Difficulty Factor</td> <td>{fixed((diff + ((diff < 20 && plus && 0.5) as number)) / SparebeatConstant.MaxDifficulty)}</td> </tr>
-					<tr> <td>Basic Rating</td> <td>{basicRating}</td> </tr>
-					<tr> <td>Multiplier</td> <td>{multiplier}</td> </tr>
-				</tbody>
-			</table>
-			<p>
-				Rating Formula: <br />
-				Point = 1000 * Score Factor * Just Factor * Difficulty Factor<br />
-				BasicRating = Floor(Point) / 100<br />
-				Rating = BasicRating * Multiplier
-			</p>
-		</div>
+			<Head title="Rating Calculator" />
+			<h1>Rating Calculator</h1>
+			<div id={styles.input}>
+				<InputArea title="Score" handleChange={handleScoreChange} value={score} />
+				<InputArea title="Just" handleChange={handleJustChange} value={justCount} />
+				<InputArea title="Rush" handleChange={handleRushChange} value={rushCount} />
+				<InputArea title="Cool" handleChange={handleCoolChange} value={coolCount} />
+				<InputArea title="Miss" handleChange={handleMissChange} value={missCount} />
+				<DiffInputArea 
+					title="Map Difficulty" 
+					handleChange={handleDiffChange} 
+					handlePlusSelect={handlePlusChange}
+					value={diff} 
+				/>
+			</div>
+			<span id={styles.show}>Your Rating: {rating}</span>
+			<h2 id={styles['detail-button']} onClick={() => {setHide(h => !h)}}>
+				{ hide ? '▲' : '▼' } Details { hide ? '▲' : '▼' }
+			</h2>
+			<div id={styles.detail} style={{ display: hide ? 'none' : 'inherit' }}>
+				<table id={styles['detail-table']}>
+					<thead>
+						<tr> <th>Item</th> <th>Value</th> </tr>
+					</thead>
+					<tbody>
+						<tr> <td>Score Factor</td> <td>{fixed(score / SparebeatConstant.MaxScore)}</td> </tr>
+						<tr> <td>Just Factor</td> <td>{fixed(justCount / (justCount + rushCount + coolCount + missCount))}</td> </tr>
+						<tr> <td>Difficulty Factor</td> <td>{fixed((diff + ((diff < 20 && plus && 0.5) as number)) / SparebeatConstant.MaxDifficulty)}</td> </tr>
+						<tr> <td>Basic Rating</td> <td>{basicRating}</td> </tr>
+						<tr> <td>Multiplier</td> <td>{multiplier}</td> </tr>
+					</tbody>
+				</table>
+				<p>
+					Rating Formula: <br />
+					Point = 1000 * Score Factor * Just Factor * Difficulty Factor<br />
+					BasicRating = Floor(Point) / 100<br />
+					Rating = BasicRating * Multiplier
+				</p>
+			</div>
 		</>
 	)
 }
