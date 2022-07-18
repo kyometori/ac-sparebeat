@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { useOwner, PageOwner } from '../utils/useOwner'
 import { ReactElement } from 'React'
 
 export const Layout: NextPage<{ children: ReactElement }> = (props) => {
@@ -25,16 +26,6 @@ export const Layout: NextPage<{ children: ReactElement }> = (props) => {
       </div>
     </>
 	)
-}
-
-enum PageOwner {
-  AC, MeowRim
-}
-
-function useOwner(route: string): PageOwner {
-  if (route.startsWith('/mrsr')) return PageOwner.MeowRim
-
-  return PageOwner.AC
 }
 
 function MainHeaderNav() {

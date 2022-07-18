@@ -4,6 +4,7 @@ import styles from '../../styles/Home.module.css'
 import { readdirSync } from 'fs'
 import { compareDiff } from '../../utils/mapDiffCompare'
 import type { MapData } from '../../utils/mapType'
+import Head from '../../components/head'
 
 interface HomePageProps {
   data: Array<MapData>
@@ -12,6 +13,7 @@ interface HomePageProps {
 const Home: NextPage<HomePageProps> = ({ data }: HomePageProps) => {
   return (
     <>
+      <Head />
       <h1>Maps</h1>
       <table className={styles.list}>
         <thead>

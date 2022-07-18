@@ -4,6 +4,7 @@ import styles from '../../../styles/Play.module.css'
 import Script from 'next/script'
 import { useEffect } from 'react'
 import { readdirSync } from 'fs'
+import Head from '../../../components/head'
 
 interface PlaygroundProps {
   name: string,
@@ -19,6 +20,7 @@ const Playground: NextPage<PlaygroundProps> = ({ name, title }) => {
 
   return (
     <>
+      <Head title={title} />
       <Script src="https://sparebeat.com/embed/api.js" 
         // @ts-ignore
         onLoad={() => window.Sparebeat.load(`../../../maps/mrsr/${name}.json`, `../../../maps/mrsr/${name}.mp3`)}

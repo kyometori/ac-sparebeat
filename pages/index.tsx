@@ -1,6 +1,7 @@
 import type { NextPage, GetStaticProps } from 'next'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
+import Head from '../components/head'
 import { readdirSync } from 'fs'
 import { compareDiff } from '../utils/mapDiffCompare'
 import type { MapData } from '../utils/mapType'
@@ -12,6 +13,7 @@ interface HomePageProps {
 const Home: NextPage<HomePageProps> = ({ data }: HomePageProps) => {
   return (
     <>
+      <Head />
       <h1>Maps</h1>
       <table className={styles.list}>
         <thead>
