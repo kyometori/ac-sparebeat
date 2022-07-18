@@ -1,0 +1,35 @@
+#input {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 5px;
+	margin: 40px;
+}
+
+#show {
+	font-size: 20px;
+}
+
+#detail {
+	margin: 0 auto;
+}
+
+#detail-button {
+	margin-top: 100px;
+	cursor: pointer;
+}
+
+#detail-table {
+	margin: 0 auto;
+	border: 1px solid black;
+	width: 50%;
+	border-collapse: collapse;
+}
+
+#detail-table th {
+	width: 50%
+}
+
+#detail-table th, #detail-table td {
+	padding: 5px;
+	border: 1px solid black;
+}
