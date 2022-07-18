@@ -27,7 +27,7 @@ const Playground: NextPage<PlaygroundProps> = ({ name, title }) => {
         onError={console.error}
       />
       <h1>{title}</h1>
-      <iframe id="sparebeat" width="960" src="http://sparebeat.com/embed/" style={{ border: 'none' }} />
+      <iframe id="sparebeat" width="960" src="https://sparebeat.com/embed/" style={{ border: 'none' }} />
       <Link href="../" passHref><a><span id={styles.back}>Back</span></a></Link>
     </>
   )
