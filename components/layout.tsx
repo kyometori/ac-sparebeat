@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useOwner, PageOwner } from '../utils/useOwner'
-import { ReactElement } from 'React'
+import { ReactElement } from 'react'
 
 export const Layout: NextPage<{ children: ReactElement }> = (props) => {
   const { route } = useRouter()
