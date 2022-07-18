@@ -1,6 +1,6 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from 'next'
 import Link from 'next/link'
-import styles from '../../styles/Play.module.css'
+import styles from '../../../styles/Play.module.css'
 import Script from 'next/script'
 import { useEffect } from 'react'
 import { readdirSync } from 'fs'
@@ -14,14 +14,14 @@ const Playground: NextPage<PlaygroundProps> = ({ name, title }) => {
   useEffect(() => {
     document.getElementById('sparebeat')!.style.height = window.outerWidth < 990 ? '1280px' : '640px'
     // @ts-ignore
-    window.Sparebeat && window.Sparebeat.load(`../maps/main/${name}.json`, `../maps/main/${name}.mp3`)
+    window.Sparebeat && window.Sparebeat.load(`../../../maps/mrsr/${name}.json`, `../../../maps/mrsr/${name}.mp3`)
   }, [name])
 
   return (
     <>
       <Script src="https://sparebeat.com/embed/api.js" 
         // @ts-ignore
-        onLoad={() => window.Sparebeat.load(`../maps/main/${name}.json`, `../maps/main/${name}.mp3`)}
+        onLoad={() => window.Sparebeat.load(`../../../maps/mrsr/${name}.json`, `../../../maps/mrsr/${name}.mp3`)}
         onError={console.error}
       />
       <h1>{title}</h1>
@@ -34,7 +34,7 @@ const Playground: NextPage<PlaygroundProps> = ({ name, title }) => {
 export default Playground
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const mapNames = readdirSync(`./public/maps/main`).filter(file => file.endsWith('.json'));
+  const mapNames = readdirSync(`./public/maps/mrsr`).filter(file => file.endsWith('.json'));
 
   return {
     paths: mapNames.map(mapName => {
@@ -46,7 +46,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const name = context.params!.name
-  const { default: mapData } = await import(`../../public/maps/main/${name}.json`)
+  const { default: mapData } = await import(`../../../public/maps/mrsr/${name}.json`)
 
   return {
     props: {

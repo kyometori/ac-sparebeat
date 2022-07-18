@@ -1,0 +1,17 @@
+#back {
+	display: block;
+  color: black;
+  background-color: #C5C5F7;
+  border: black 1px solid;
+  margin-top: 35px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 75px;
+  height: 25px;
+  padding-top: 6px;
+  cursor: pointer;
+}
+
+#back:hover {
+	background-color: #DFDFF5;
+}
