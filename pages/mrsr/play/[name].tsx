@@ -1,10 +1,10 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from 'next'
 import Link from 'next/link'
 import styles from '../../../styles/Play.module.css'
-import Script from 'next/script'
 import { useEffect } from 'react'
 import { readdirSync } from 'fs'
 import Head from '../../../components/head'
+import { useScript } from '../../../utils/useScript'
 
 interface PlaygroundProps {
   name: string,
@@ -12,20 +12,18 @@ interface PlaygroundProps {
 }
 
 const Playground: NextPage<PlaygroundProps> = ({ name, title }) => {
+  useScript("https://sparebeat.com/embed/api.js", () => {
+    // @ts-ignore
+    window.Sparebeat.load(`../../maps/mrsr/${name}.json`, `../../maps/mrsr/${name}.mp3`)
+  })
+
   useEffect(() => {
     document.getElementById('sparebeat')!.style.height = window.outerWidth < 990 ? '1280px' : '640px'
-    // @ts-ignore
-    window.Sparebeat && window.Sparebeat.load(`../../../maps/mrsr/${name}.json`, `../../../maps/mrsr/${name}.mp3`)
-  }, [name])
+  }, [])
 
   return (
     <>
       <Head title={title} />
-      <Script src="https://sparebeat.com/embed/api.js" 
-        // @ts-ignore
-        onLoad={() => window.Sparebeat.load(`../../../maps/mrsr/${name}.json`, `../../../maps/mrsr/${name}.mp3`)}
-        onError={console.error}
-      />
       <h1>{title}</h1>
       <iframe id="sparebeat" width="960" src="https://sparebeat.com/embed/" style={{ border: 'none' }} />
       <Link href="../" passHref><a><span id={styles.back}>Back</span></a></Link>
