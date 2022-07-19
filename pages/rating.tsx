@@ -79,7 +79,7 @@ const RatingCalc: NextPage = () => {
 		const isFullCombo = missCount === 0
 		const isAllJust = justCount === maxCombo
 
-		const accuracy = ~~((1 - (rushCount + coolCount) / (maxCombo)) * 1e4) / 1e4
+		const accuracy = ~~((justCount + rushCount * 0.5 + coolCount * 0.5) / maxCombo * 1e4) / 1e4
 
 		let basicRating = 1000 * scoreFactor * justFactor * diffFactor
 
@@ -91,7 +91,7 @@ const RatingCalc: NextPage = () => {
 		else if (isFullCombo) multiplier *= 1.05
 
 		// multiplier *= Math.min(accuracy * 1.05, 1)
-		// multiplier = fixed(multiplier)
+		multiplier = fixed(multiplier)
 
 		const rating = ~~(basicRating * multiplier) / 100
 		basicRating = ~~(basicRating) / 100
