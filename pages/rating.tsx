@@ -21,6 +21,7 @@ const RatingCalc: NextPage = () => {
 	const [rating, setRating] = useState(0)
 	const [basicRating, setBasicRating] = useState(0)
 	const [multiplier, setMultiplier] = useState(1)
+	const [accuracy, setAccuracy] = useState(0)
 
 	const [hide, setHide] = useState(true)
 
@@ -78,6 +79,8 @@ const RatingCalc: NextPage = () => {
 		const isFullCombo = missCount === 0
 		const isAllJust = justCount === maxCombo
 
+		const accuracy = ~~((1 - (rushCount + coolCount) / (maxCombo)) * 1e4) / 1e4
+
 		let basicRating = 1000 * scoreFactor * justFactor * diffFactor
 
 		let multiplier = 1
@@ -87,10 +90,14 @@ const RatingCalc: NextPage = () => {
 		if (isAllJust) multiplier *= 1.5
 		else if (isFullCombo) multiplier *= 1.05
 
+		// multiplier *= Math.min(accuracy * 1.05, 1)
+		// multiplier = fixed(multiplier)
+
 		const rating = ~~(basicRating * multiplier) / 100
 		basicRating = ~~(basicRating) / 100
 
 		setBasicRating(basicRating)
+		setAccuracy(accuracy)
 		setMultiplier(multiplier)
 		setRating(rating)
 
@@ -127,6 +134,7 @@ const RatingCalc: NextPage = () => {
 						<tr> <td>Just Factor</td> <td>{fixed(justCount / (justCount + rushCount + coolCount + missCount))}</td> </tr>
 						<tr> <td>Difficulty Factor</td> <td>{fixed((diff + ((diff < 20 && plus && 0.5) as number)) / SparebeatConstant.MaxDifficulty)}</td> </tr>
 						<tr> <td>Basic Rating</td> <td>{basicRating}</td> </tr>
+						<tr> <td>Accuracy</td> <td>{accuracy * 100}%</td> </tr>
 						<tr> <td>Multiplier</td> <td>{multiplier}</td> </tr>
 					</tbody>
 				</table>
