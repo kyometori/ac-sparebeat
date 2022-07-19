@@ -134,7 +134,7 @@ const RatingCalc: NextPage = () => {
 						<tr> <td>Just Factor</td> <td>{fixed(justCount / (justCount + rushCount + coolCount + missCount))}</td> </tr>
 						<tr> <td>Difficulty Factor</td> <td>{fixed((diff + ((diff < 20 && plus && 0.5) as number)) / SparebeatConstant.MaxDifficulty)}</td> </tr>
 						<tr> <td>Basic Rating</td> <td>{basicRating}</td> </tr>
-						<tr> <td>Accuracy</td> <td>{accuracy * 100}%</td> </tr>
+						<tr> <td>Accuracy</td> <td>{accuracy * 1e4 / 1e2}%</td> </tr>
 						<tr> <td>Multiplier</td> <td>{multiplier}</td> </tr>
 					</tbody>
 				</table>
