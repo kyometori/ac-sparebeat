@@ -23,7 +23,7 @@ const Home: NextPage<HomePageProps> = ({ data }: HomePageProps) => {
         {
           data.map((d, i) => (
             <tr key={d.name} className={d.in ? styles.in : ''}>
-              <td><Link href={`/play/${d.name}`}><a>{d.title}</a></Link></td>
+              <td><Link href={`/play/${d.name}`}>{d.title}</Link></td>
               <td>{d.artist}</td>
               <td>{d.level.easy || "-"}</td>
               <td>{d.level.normal || "-"}</td>

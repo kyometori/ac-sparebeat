@@ -31,8 +31,8 @@ export const Layout: NextPage<{ children: ReactElement }> = (props) => {
 function MainHeaderNav() {
   return (
     <ul>
-      <Link href="/"><a><li>Main Page</li></a></Link>
-      <Link href="/mrsr"><a id="friend"><li>MeowRim</li></a></Link>
+      <Link href="/"><li>Main Page</li></Link>
+      <Link href="/mrsr" id="friend"><li>MeowRim</li></Link>
     </ul>
   )
 }
@@ -40,8 +40,8 @@ function MainHeaderNav() {
 function MrsrHeaderNav() {
   return (
     <ul>
-      <Link href="/mrsr"><a><li>Main Page</li></a></Link>
-      <Link href="/"><a id="friend"><li>AC</li></a></Link>
+      <Link href="/mrsr"><li>Main Page</li></Link>
+      <Link href="/" id="friend"><li>AC</li></Link>
     </ul>
   )
 }

@@ -26,7 +26,7 @@ const Playground: NextPage<PlaygroundProps> = ({ name, title }) => {
       <Head title={title} />
       <h1>{title}</h1>
       <iframe id="sparebeat" width="960" src="https://sparebeat.com/embed/" style={{ border: 'none' }} />
-      <Link href="/" passHref><a><span id={styles.back}>Back</span></a></Link>
+      <Link href="/"><span id={styles.back}>Back</span></Link>
     </>
   )
 }
