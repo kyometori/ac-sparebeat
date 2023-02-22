@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from '../components/head'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useReducer } from 'react'
 import styles from '../styles/Rating.module.css'
 
 const SparebeatConstant = {
@@ -9,65 +9,97 @@ const SparebeatConstant = {
 	MaxDifficulty: 20 // This is only true in AC Sparebeat Room
 }
 
-const RatingCalc: NextPage = () => {
-	const [score, setScore] = useState(0)
-	const [justCount, setJustCount] = useState(0)
-	const [rushCount, setRushCount] = useState(0)
-	const [coolCount, setCoolCount] = useState(0)
-	const [missCount, setMissCount] = useState(0)
-	const [diff, setDiff] = useState(0)
-	const [plus, setPlus] = useState(false)
+interface RatingDataStruct {
+  score: number
+  justCount: number
+  rushCount: number
+  coolCount: number
+  missCount: number
+  diff: number
+  plus: boolean
+}
 
-	const [rating, setRating] = useState(0)
-	const [basicRating, setBasicRating] = useState(0)
-	const [multiplier, setMultiplier] = useState(1)
-	const [accuracy, setAccuracy] = useState(0)
+interface RatingData {
+  rating: number
+  basicRating: number
+  multiplier: number
+  accuracy: number
+}
+
+const RatingCalc: NextPage = () => {
+  const [data, updateData] = useReducer((prev: RatingDataStruct, update: Partial<RatingDataStruct>): RatingDataStruct => {
+    if (update.score) {
+      const value = +update.score
+      if (isNaN(value) || value > SparebeatConstant.MaxScore || value < 0) return prev
+    }
+
+    if (update.justCount) {
+      const value = +update.justCount
+      if (isNaN(value) ||  value < 0) return prev
+    }
+
+    if (update.rushCount) {
+      const value = +update.rushCount
+      if (isNaN(value) ||  value < 0) return prev
+    }
+
+    if (update.coolCount) {
+      const value = +update.coolCount
+      if (isNaN(value) ||  value < 0) return prev
+    }
+
+    if (update.missCount) {
+      const value = +update.missCount
+      if (isNaN(value) ||  value < 0) return prev
+    }
+
+    if (update.diff) { 
+      const value = +update.diff
+      if (isNaN(value) || value > SparebeatConstant.MaxDifficulty || value < 0) return prev
+    }
+
+    return { ...prev, ...update }
+  }, {
+    score: 0, 
+    justCount: 0, rushCount: 0, coolCount: 0, missCount: 0,
+    diff: 0, plus: false
+  })
+
+  const [performance, updatePerformance] = useReducer((prev: RatingData, next: Partial<RatingData>) => ({ ...prev, ...next }), 
+    { rating: 0, basicRating: 0, multiplier: 1, accuracy: 0 })
 
 	const [hide, setHide] = useState(true)
 
 	const handleScoreChange = (value: string) => {
-		if (isNaN(+value)) return
-		if (+value > SparebeatConstant.MaxScore) return
-		if (+value < 0) return
-		setScore(~~(+value))
+	  updateData({ score: +value })	
 	}
 
 	const handleJustChange = (value: string) => {
-		if (isNaN(+value)) return
-		if (+value < 0) return
-		setJustCount(~~(+value))
+    updateData({ justCount: +value })
 	}
 
 	const handleRushChange = (value: string) => {
-		if (isNaN(+value)) return
-		if (+value < 0) return
-		setRushCount(~~(+value))
+    updateData({ rushCount: +value })
 	}
 
 	const handleCoolChange = (value: string) => {
-		if (isNaN(+value)) return
-		if (+value < 0) return
-		setCoolCount(~~(+value))
+    updateData({ coolCount: +value })
 	}
 
 	const handleMissChange = (value: string) => {
-		if (isNaN(+value)) return
-		if (+value < 0) return
-		setMissCount(~~(+value))
+    updateData({ missCount: +value })
 	}
 
 	const handleDiffChange = (value: string) => {
-		if (isNaN(+value)) return
-		if (+value > SparebeatConstant.MaxDifficulty) return
-		if (+value < 0) return
-		setDiff(~~(+value))
+    updateData({ diff: +value })
 	}
 
 	const handlePlusChange = (value: boolean) => {
-		setPlus(value)
+	  updateData({ plus: value })
 	}
 
 	useEffect(() => {
+    const { score, justCount, rushCount, coolCount, missCount, diff, plus} = data
 		const maxCombo = justCount + rushCount + coolCount + missCount
 		const realDiff = diff + ((diff < 20 && plus && 0.5) as number)
 
@@ -90,18 +122,19 @@ const RatingCalc: NextPage = () => {
 		if (isAllJust) multiplier *= 1.5
 		else if (isFullCombo) multiplier *= 1.05
 
-		// multiplier *= Math.min(accuracy * 1.05, 1)
+		multiplier *= Math.min(accuracy * 1.05, 1)
 		multiplier = fixed(multiplier)
 
 		const rating = ~~(basicRating * multiplier) / 100
 		basicRating = ~~(basicRating) / 100
-
-		setBasicRating(basicRating)
-		setAccuracy(accuracy)
-		setMultiplier(multiplier)
-		setRating(rating)
-
-	}, [score, justCount, rushCount, coolCount, missCount, diff, plus])
+    
+    updatePerformance({
+      rating, basicRating, multiplier, accuracy
+    })
+	}, [data])
+  
+  const { score, justCount, rushCount, coolCount, missCount, diff, plus} = data
+  const { rating, basicRating, multiplier, accuracy } = performance
 
 	return (
 		<>
