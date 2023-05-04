@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/swc-darwin-arm64": "^13.3.4",
     "next": "^13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0"

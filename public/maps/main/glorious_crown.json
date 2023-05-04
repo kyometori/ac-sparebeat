@@ -1,7 +1,7 @@
 {
 	"title": "Glorious Crown",
 	"artist": "xi",
-	"url": "https://kyometori.github.io/sparebeat/【裏】Glorious Crown",
+	"url": "https://acspb.vercel.app/play/$___glorious_crown",
 	"bgColor": [
 		"#f6ff00",
 		"#e80001"
@@ -12,7 +12,7 @@
 	"level": {
 		"easy": "-",
 		"normal": "-",
-		"hard": "18"
+		"hard": "16+"
 	},
 	"map": {
 		"easy": [
