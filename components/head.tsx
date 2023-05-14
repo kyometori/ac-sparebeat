@@ -8,7 +8,7 @@ interface HeadProps {
   description?: string
 }
 
-const Header: NextPage<HeadProps> = (props: HeadProps) => {
+const Header: NextPage<HeadProps> = (props) => {
   const { route } = useRouter()
   const owner = useOwner(route)
 
